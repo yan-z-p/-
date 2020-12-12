@@ -236,6 +236,15 @@ export default {
         },
         //加入购物车
         shopcar(buy){
+
+             //获取token
+        let tokenString = localStorage.getItem('__tk');
+
+        if(!tokenString){
+            //未登录
+            this.$toast("请先登录");
+            return this.$router.push({name:"Login"})
+        }
             // 
             // 
             //规格
@@ -243,8 +252,7 @@ export default {
               //商品pid
             let shopPid=this.$route.params.pid
 
-            //获取token
-            let tokenString = localStorage.getItem('__tk');
+            
 
             
             this.axios({
@@ -259,6 +267,11 @@ export default {
                 }
             }).then(result=>{
                 
+                 if (result.data.code == 700) {
+            //token检验无效,则跳到登录页面
+            this.$toast('token检验无效')
+            return this.$router.push({name: 'Login'});
+                } 
                 if(result.data.code==3000){
                     
                     
@@ -284,6 +297,7 @@ export default {
         goshopbag(){
             this.$router.push({name:'Shopbag'})
         },
+        //立即购买
         pay(){
             let buy=true;
             this.shopcar(buy)

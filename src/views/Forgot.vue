@@ -198,7 +198,7 @@ export default {
     },
     //游客进入
     you() {
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: "Home" });
     },
     //获取验证码
     verification() {
