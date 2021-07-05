@@ -4,6 +4,7 @@ import _fetch from "./request";
 export function banner(params) {
   return _fetch({
     url: "/banner",
+	needKey: true,
     params
   });
 }
